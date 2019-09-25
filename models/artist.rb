@@ -44,8 +44,12 @@ attr_accessor :name
     return albums
   end
 
-
-
-
+  def self.find(id)
+    sql = "SELECT * FROM artists WHERE id = $1"
+    values = [id]
+    results = SqlRunner.run(sql, values)
+    artist_hash = results.first
+    return Artist.new(artist_hash)
+  end
 
 end
